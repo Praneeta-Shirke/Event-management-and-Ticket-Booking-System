@@ -2,9 +2,7 @@ package com.entity;
 
 import java.time.LocalDate;
 // import java.time.OffsetDateTime;
-
 // import org.springframework.data.annotation.CreatedDate;
-
 // import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
