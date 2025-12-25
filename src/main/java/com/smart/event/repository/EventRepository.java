@@ -15,4 +15,5 @@ public interface EventRepository extends JpaRepository<Event,Long>{
     List<Event> findByLocation(String Location);
     List<Event> findByStatusEvents(Event_status status);
     List<Event> findByOrganizerId_UId(Long organizerId);
+    List<Event> findAll();
 }

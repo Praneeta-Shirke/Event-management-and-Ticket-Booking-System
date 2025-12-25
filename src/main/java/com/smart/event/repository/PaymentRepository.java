@@ -1,0 +1,17 @@
+package com.smart.event.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.smart.event.event_management_system.entity.Booking;
+import com.smart.event.event_management_system.entity.Payment;
+import com.smart.event.event_management_system.entity.Payment_status;
+
+@Repository
+public interface PaymentRepository extends JpaRepository<Payment,Long>{
+    List<Payment> findBybid(Booking bid);
+    List<Payment> findBypStaus(Payment_status pStatus);
+    List<Payment> findAll();
+}
