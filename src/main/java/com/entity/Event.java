@@ -22,9 +22,7 @@ public class Event {
     private int total_Ticket;
     private int available_tickets;
     private int organizer_Id;
-    private boolean status;
-
-
+    private Event_status e_status;
     public int getE_id() {
         return e_id;
     }
@@ -85,21 +83,14 @@ public class Event {
     public void setOrganizer_Id(int organizer_Id) {
         this.organizer_Id = organizer_Id;
     }
-    public boolean isStatus() {
-        return status;
+    public Event_status getE_status() {
+        return e_status;
     }
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-    @Override
-    public String toString() {
-        return "Event [e_id=" + e_id + ", title=" + title + ", description=" + description + ", location=" + location
-                + ", eventDate=" + eventDate + ", time=" + time + ", price=" + price + ", total_Ticket=" + total_Ticket
-                + ", available_tickets=" + available_tickets + ", organizer_Id=" + organizer_Id + ", status=" + status
-                + "]";
+    public void setE_status(Event_status e_status) {
+        this.e_status = e_status;
     }
     public Event(int e_id, String title, String description, String location, LocalDate eventDate, LocalTime time,
-            int price, int total_Ticket, int available_tickets, int organizer_Id, boolean status) {
+            int price, int total_Ticket, int available_tickets, int organizer_Id, Event_status e_status) {
         this.e_id = e_id;
         this.title = title;
         this.description = description;
@@ -110,6 +101,20 @@ public class Event {
         this.total_Ticket = total_Ticket;
         this.available_tickets = available_tickets;
         this.organizer_Id = organizer_Id;
-        this.status = status;
+        this.e_status = e_status;
     }
+    @Override
+    public String toString() {
+        return "Event [e_id=" + e_id + ", title=" + title + ", description=" + description + ", location=" + location
+                + ", eventDate=" + eventDate + ", time=" + time + ", price=" + price + ", total_Ticket=" + total_Ticket
+                + ", available_tickets=" + available_tickets + ", organizer_Id=" + organizer_Id + ", e_status="
+                + e_status + ", getE_id()=" + getE_id() + ", getTitle()=" + getTitle() + ", getDescription()="
+                + getDescription() + ", getLocation()=" + getLocation() + ", getEventDate()=" + getEventDate()
+                + ", getTime()=" + getTime() + ", getPrice()=" + getPrice() + ", getTotal_Ticket()=" + getTotal_Ticket()
+                + ", getAvailable_tickets()=" + getAvailable_tickets() + ", getOrganizer_Id()=" + getOrganizer_Id()
+                + ", getE_status()=" + getE_status() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+                + ", toString()=" + super.toString() + "]";
+    }
+
+    
 }

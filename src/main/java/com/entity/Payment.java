@@ -14,8 +14,9 @@ public class Payment {
     private int p_id;
     private int b_id;
     private String mode;
-    private boolean payment_status;
+    private Payment_status p_status;
     private LocalDate paymentDate;
+    
     public int getP_id() {
         return p_id;
     }
@@ -34,11 +35,11 @@ public class Payment {
     public void setMode(String mode) {
         this.mode = mode;
     }
-    public boolean isPayment_status() {
-        return payment_status;
+    public Payment_status getP_status() {
+        return p_status;
     }
-    public void setPayment_status(boolean payment_status) {
-        this.payment_status = payment_status;
+    public void setP_status(Payment_status p_status) {
+        this.p_status = p_status;
     }
     public LocalDate getPaymentDate() {
         return paymentDate;
@@ -46,19 +47,22 @@ public class Payment {
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
-    public Payment(int p_id, int b_id, String mode, boolean payment_status, LocalDate paymentDate) {
+    public Payment(int p_id, int b_id, String mode, Payment_status p_status, LocalDate paymentDate) {
         this.p_id = p_id;
         this.b_id = b_id;
         this.mode = mode;
-        this.payment_status = payment_status;
+        this.p_status = p_status;
         this.paymentDate = paymentDate;
     }
     @Override
     public String toString() {
-        return "Payment [p_id=" + p_id + ", b_id=" + b_id + ", mode=" + mode + ", payment_status=" + payment_status
+        return "Payment [p_id=" + p_id + ", b_id=" + b_id + ", mode=" + mode + ", p_status=" + p_status
                 + ", paymentDate=" + paymentDate + ", getP_id()=" + getP_id() + ", getB_id()=" + getB_id()
-                + ", getMode()=" + getMode() + ", isPayment_status()=" + isPayment_status() + ", getPaymentDate()="
+                + ", getMode()=" + getMode() + ", getP_status()=" + getP_status() + ", getPaymentDate()="
                 + getPaymentDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
                 + super.toString() + "]";
     }
+
+    
+
 }

@@ -21,7 +21,7 @@ public class Booking {
     // @CreatedDate
     // @Column(nullable = false, updatable = false)
     private LocalDate bookingDate;
-    private boolean Status;
+    private Booking_status b_status;
     public int getB_id() {
         return b_id;
     }
@@ -58,30 +58,30 @@ public class Booking {
     public void setBookingDate(LocalDate bookingDate) {
         this.bookingDate = bookingDate;
     }
-    public boolean isStatus() {
-        return Status;
+    public Booking_status getb_status() {
+        return b_status;
     }
-    public void setStatus(boolean status) {
-        Status = status;
+    public void setb_status(Booking_status b_status) {
+        this.b_status = b_status;
     }
     public Booking(int b_id, int u_id, int e_id, int numOfTickets, int total_price, LocalDate bookingDate,
-            boolean status) {
+            Booking_status b_status) {
         this.b_id = b_id;
         this.u_id = u_id;
         this.e_id = e_id;
         this.numOfTickets = numOfTickets;
         this.total_price = total_price;
         this.bookingDate = bookingDate;
-        Status = status;
+        this.b_status = b_status;
     }
     @Override
     public String toString() {
         return "Booking [b_id=" + b_id + ", u_id=" + u_id + ", e_id=" + e_id + ", numOfTickets=" + numOfTickets
-                + ", total_price=" + total_price + ", bookingDate=" + bookingDate + ", Status=" + Status
+                + ", total_price=" + total_price + ", bookingDate=" + bookingDate + ", b_status=" + b_status
                 + ", getB_id()=" + getB_id() + ", getU_id()=" + getU_id() + ", getE_id()=" + getE_id()
                 + ", getNumOfTickets()=" + getNumOfTickets() + ", getTotal_price()=" + getTotal_price()
-                + ", getBookingDate()=" + getBookingDate() + ", isStatus()=" + isStatus() + ", getClass()=" + getClass()
-                + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+                + ", getBookingDate()=" + getBookingDate() + ", getb_status()=" + getb_status() + ", getClass()="
+                + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
     }
 
     
