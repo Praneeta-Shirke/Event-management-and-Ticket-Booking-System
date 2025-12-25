@@ -25,7 +25,7 @@ public class Payment {
     private String mode;
 
     @Enumerated(EnumType.STRING)
-    private Payment_status p_status;
+    private Payment_status pStatus;
     private LocalDate paymentDate;
 
     public long getpid() {
@@ -46,11 +46,11 @@ public class Payment {
     public void setMode(String mode) {
         this.mode = mode;
     }
-    public Payment_status getP_status() {
-        return p_status;
+    public Payment_status getpStatus() {
+        return pStatus;
     }
-    public void setP_status(Payment_status p_status) {
-        this.p_status = p_status;
+    public void setpStatus(Payment_status pStatus) {
+        this.pStatus = pStatus;
     }
     public LocalDate getPaymentDate() {
         return paymentDate;
@@ -58,18 +58,18 @@ public class Payment {
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
-    public Payment(long pid, Booking booking, String mode, Payment_status p_status, LocalDate paymentDate) {
+    public Payment(long pid, Booking booking, String mode, Payment_status pStatus, LocalDate paymentDate) {
         this.pid = pid;
         this.booking = booking;
         this.mode = mode;
-        this.p_status = p_status;
+        this.pStatus = pStatus;
         this.paymentDate = paymentDate;
     }
     @Override
     public String toString() {
-        return "Payment [pid=" + pid + ", booking=" + booking + ", mode=" + mode + ", p_status=" + p_status
+        return "Payment [pid=" + pid + ", booking=" + booking + ", mode=" + mode + ", pStatus=" + pStatus
                 + ", paymentDate=" + paymentDate + ", getpid()=" + getpid() + ", getbooking()=" + getbooking()
-                + ", getMode()=" + getMode() + ", getP_status()=" + getP_status() + ", getPaymentDate()="
+                + ", getMode()=" + getMode() + ", getpStatus()=" + getpStatus() + ", getPaymentDate()="
                 + getPaymentDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
                 + super.toString() + "]";
     }
