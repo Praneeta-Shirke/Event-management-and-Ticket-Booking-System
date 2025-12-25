@@ -1,4 +1,4 @@
-package com.smart.event.repository;
+package com.smart.event.event_management_system.repository;
 
 import java.time.LocalDate;
 import java.util.List;
