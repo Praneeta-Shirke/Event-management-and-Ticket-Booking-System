@@ -1,4 +1,4 @@
-package com.entity;
+package com.smart.event.event_management_system.entity;
 
 import java.time.LocalDateTime;
 
@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long u_id;
+    private Long uid;
     private String name;
     @Column(unique = true, nullable = false)
     private String email;
@@ -24,11 +24,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
     private LocalDateTime createdAt;
+
+
     public Long getId() {
-        return id;
+        return uid;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long uid) {
+        this.uid = uid;
     }
     public String getName() {
         return name;
@@ -60,8 +62,8 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-    public User(Long id, String name, String email, String password, Role role, LocalDateTime createdAt) {
-        this.id = id;
+    public User(Long uid, String name, String email, String password, Role role, LocalDateTime createdAt) {
+        this.uid = uid;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -70,7 +72,7 @@ public class User {
     }
     @Override
     public String toString() {
-        return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+        return "User [uid=" + uid + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
                 + ", createdAt=" + createdAt + "]";
     }
 

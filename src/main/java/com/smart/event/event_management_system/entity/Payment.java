@@ -1,33 +1,44 @@
-package com.entity;
+package com.smart.event.event_management_system.entity;
 
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="Payments")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int p_id;
-    private int b_id;
+    private long pid;
+
+    @OneToOne
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking;
     private String mode;
+
+    @Enumerated(EnumType.STRING)
     private Payment_status p_status;
     private LocalDate paymentDate;
-    
-    public int getP_id() {
-        return p_id;
+
+    public long getpid() {
+        return pid;
     }
-    public void setP_id(int p_id) {
-        this.p_id = p_id;
+    public void setpid(long pid) {
+        this.pid = pid;
     }
-    public int getB_id() {
-        return b_id;
+    public Booking getbooking() {
+        return booking;
     }
-    public void setB_id(int b_id) {
-        this.b_id = b_id;
+    public void setbooking(Booking booking) {
+        this.booking = booking;
     }
     public String getMode() {
         return mode;
@@ -47,17 +58,17 @@ public class Payment {
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
-    public Payment(int p_id, int b_id, String mode, Payment_status p_status, LocalDate paymentDate) {
-        this.p_id = p_id;
-        this.b_id = b_id;
+    public Payment(long pid, Booking booking, String mode, Payment_status p_status, LocalDate paymentDate) {
+        this.pid = pid;
+        this.booking = booking;
         this.mode = mode;
         this.p_status = p_status;
         this.paymentDate = paymentDate;
     }
     @Override
     public String toString() {
-        return "Payment [p_id=" + p_id + ", b_id=" + b_id + ", mode=" + mode + ", p_status=" + p_status
-                + ", paymentDate=" + paymentDate + ", getP_id()=" + getP_id() + ", getB_id()=" + getB_id()
+        return "Payment [pid=" + pid + ", booking=" + booking + ", mode=" + mode + ", p_status=" + p_status
+                + ", paymentDate=" + paymentDate + ", getpid()=" + getpid() + ", getbooking()=" + getbooking()
                 + ", getMode()=" + getMode() + ", getP_status()=" + getP_status() + ", getPaymentDate()="
                 + getPaymentDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
                 + super.toString() + "]";

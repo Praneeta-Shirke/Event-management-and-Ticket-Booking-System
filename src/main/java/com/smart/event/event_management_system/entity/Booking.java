@@ -1,44 +1,57 @@
-package com.entity;
+package com.smart.event.event_management_system.entity;
 
 import java.time.LocalDate;
 // import java.time.OffsetDateTime;
 // import org.springframework.data.annotation.CreatedDate;
 // import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="Bookings")
 public class Booking {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int b_id;
-    private int u_id;
-    private int e_id;
+    private long bid;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
     private int numOfTickets;
-    private int total_price;
-    // @CreatedDate
-    // @Column(nullable = false, updatable = false)
+    private double total_price;
     private LocalDate bookingDate;
+    
+    @Enumerated(EnumType.STRING)
     private Booking_status b_status;
-    public int getB_id() {
-        return b_id;
+
+    public long getbid() {
+        return bid;
     }
-    public void setB_id(int b_id) {
-        this.b_id = b_id;
+    public void setbid(long bid) {
+        this.bid = bid;
     }
-    public int getU_id() {
-        return u_id;
+    public User getuser() {
+        return user;
     }
-    public void setU_id(int u_id) {
-        this.u_id = u_id;
+    public void setuser(User user) {
+        this.user = user;
     }
-    public int getE_id() {
-        return e_id;
+    public Event getevent() {
+        return event;
     }
-    public void setE_id(int e_id) {
-        this.e_id = e_id;
+    public void setevent(Event event) {
+        this.event = event;
     }
     public int getNumOfTickets() {
         return numOfTickets;
@@ -46,10 +59,10 @@ public class Booking {
     public void setNumOfTickets(int numOfTickets) {
         this.numOfTickets = numOfTickets;
     }
-    public int getTotal_price() {
+    public double getTotal_price() {
         return total_price;
     }
-    public void setTotal_price(int total_price) {
+    public void setTotal_price(double total_price) {
         this.total_price = total_price;
     }
     public LocalDate getBookingDate() {
@@ -64,11 +77,11 @@ public class Booking {
     public void setb_status(Booking_status b_status) {
         this.b_status = b_status;
     }
-    public Booking(int b_id, int u_id, int e_id, int numOfTickets, int total_price, LocalDate bookingDate,
+    public Booking(long bid, User user, Event event, int numOfTickets, double total_price, LocalDate bookingDate,
             Booking_status b_status) {
-        this.b_id = b_id;
-        this.u_id = u_id;
-        this.e_id = e_id;
+        this.bid = bid;
+        this.user = user;
+        this.event = event;
         this.numOfTickets = numOfTickets;
         this.total_price = total_price;
         this.bookingDate = bookingDate;
@@ -76,9 +89,9 @@ public class Booking {
     }
     @Override
     public String toString() {
-        return "Booking [b_id=" + b_id + ", u_id=" + u_id + ", e_id=" + e_id + ", numOfTickets=" + numOfTickets
+        return "Booking [bid=" + bid + ", user=" + user + ", event=" + event + ", numOfTickets=" + numOfTickets
                 + ", total_price=" + total_price + ", bookingDate=" + bookingDate + ", b_status=" + b_status
-                + ", getB_id()=" + getB_id() + ", getU_id()=" + getU_id() + ", getE_id()=" + getE_id()
+                + ", getbid()=" + getbid() + ", getuser()=" + getuser() + ", getevent()=" + getevent()
                 + ", getNumOfTickets()=" + getNumOfTickets() + ", getTotal_price()=" + getTotal_price()
                 + ", getBookingDate()=" + getBookingDate() + ", getb_status()=" + getb_status() + ", getClass()="
                 + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";

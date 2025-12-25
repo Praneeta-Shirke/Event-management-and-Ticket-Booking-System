@@ -1,33 +1,46 @@
-package com.entity;
+package com.smart.event.event_management_system.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="Events")
 public class Event {
     @Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int e_id;
+    private long eid;
     private String title;
     private String description;
     private String location;
     private LocalDate eventDate;
     private LocalTime time;
-    private int price;
+    private double price;
     private int total_Ticket;
     private int available_tickets;
-    private int organizer_Id;
+    
+    @ManyToOne
+    @JoinColumn(name = "organizer_id", nullable = false)
+    private User organizer_Id;
+    
+    @Enumerated(EnumType.STRING)
     private Event_status e_status;
-    public int getE_id() {
-        return e_id;
+
+
+    public long geteid() {
+        return eid;
     }
-    public void setE_id(int e_id) {
-        this.e_id = e_id;
+    public void seteid(long eid) {
+        this.eid = eid;
     }
     public String getTitle() {
         return title;
@@ -59,10 +72,10 @@ public class Event {
     public void setTime(LocalTime time) {
         this.time = time;
     }
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     public int getTotal_Ticket() {
@@ -77,10 +90,10 @@ public class Event {
     public void setAvailable_tickets(int available_tickets) {
         this.available_tickets = available_tickets;
     }
-    public int getOrganizer_Id() {
+    public User getOrganizer_Id() {
         return organizer_Id;
     }
-    public void setOrganizer_Id(int organizer_Id) {
+    public void setOrganizer_Id(User organizer_Id) {
         this.organizer_Id = organizer_Id;
     }
     public Event_status getE_status() {
@@ -89,9 +102,9 @@ public class Event {
     public void setE_status(Event_status e_status) {
         this.e_status = e_status;
     }
-    public Event(int e_id, String title, String description, String location, LocalDate eventDate, LocalTime time,
-            int price, int total_Ticket, int available_tickets, int organizer_Id, Event_status e_status) {
-        this.e_id = e_id;
+    public Event(long eid, String title, String description, String location, LocalDate eventDate, LocalTime time,
+            double price, int total_Ticket, int available_tickets, User organizer_Id, Event_status e_status) {
+        this.eid = eid;
         this.title = title;
         this.description = description;
         this.location = location;
@@ -105,10 +118,10 @@ public class Event {
     }
     @Override
     public String toString() {
-        return "Event [e_id=" + e_id + ", title=" + title + ", description=" + description + ", location=" + location
+        return "Event [eid=" + eid + ", title=" + title + ", description=" + description + ", location=" + location
                 + ", eventDate=" + eventDate + ", time=" + time + ", price=" + price + ", total_Ticket=" + total_Ticket
                 + ", available_tickets=" + available_tickets + ", organizer_Id=" + organizer_Id + ", e_status="
-                + e_status + ", getE_id()=" + getE_id() + ", getTitle()=" + getTitle() + ", getDescription()="
+                + e_status + ", geteid()=" + geteid() + ", getTitle()=" + getTitle() + ", getDescription()="
                 + getDescription() + ", getLocation()=" + getLocation() + ", getEventDate()=" + getEventDate()
                 + ", getTime()=" + getTime() + ", getPrice()=" + getPrice() + ", getTotal_Ticket()=" + getTotal_Ticket()
                 + ", getAvailable_tickets()=" + getAvailable_tickets() + ", getOrganizer_Id()=" + getOrganizer_Id()

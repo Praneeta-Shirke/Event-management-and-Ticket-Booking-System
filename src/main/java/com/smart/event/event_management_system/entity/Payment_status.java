@@ -1,4 +1,4 @@
-package com.entity;
+package com.smart.event.event_management_system.entity;
 
 public enum Payment_status {
     INITIATED,
