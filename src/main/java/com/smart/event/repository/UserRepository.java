@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.smart.event.event_management_system.entity.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,long> {
+public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findAll(); 
 }
