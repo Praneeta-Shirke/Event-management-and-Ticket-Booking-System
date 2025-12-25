@@ -1,11 +1,11 @@
 package com.entity;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
+// import java.time.OffsetDateTime;
 
-import org.springframework.data.annotation.CreatedDate;
+// import org.springframework.data.annotation.CreatedDate;
 
-import jakarta.persistence.Column;
+// import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,9 +20,9 @@ public class Booking {
     private int e_id;
     private int numOfTickets;
     private int total_price;
-    @CreatedDate
-    @Column(nullable = false, updatable = false)
-    private OffsetDateTime bookingDate;
+    // @CreatedDate
+    // @Column(nullable = false, updatable = false)
+    private LocalDate bookingDate;
     private boolean Status;
     public int getB_id() {
         return b_id;
@@ -54,10 +54,10 @@ public class Booking {
     public void setTotal_price(int total_price) {
         this.total_price = total_price;
     }
-    public OffsetDateTime getBookingDate() {
+    public LocalDate getBookingDate() {
         return bookingDate;
     }
-    public void setBookingDate(OffsetDateTime bookingDate) {
+    public void setBookingDate(LocalDate bookingDate) {
         this.bookingDate = bookingDate;
     }
     public boolean isStatus() {
@@ -66,7 +66,7 @@ public class Booking {
     public void setStatus(boolean status) {
         Status = status;
     }
-    public Booking(int b_id, int u_id, int e_id, int numOfTickets, int total_price, OffsetDateTime bookingDate,
+    public Booking(int b_id, int u_id, int e_id, int numOfTickets, int total_price, LocalDate bookingDate,
             boolean status) {
         this.b_id = b_id;
         this.u_id = u_id;
