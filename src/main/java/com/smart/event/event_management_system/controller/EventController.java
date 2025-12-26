@@ -12,6 +12,8 @@ import com.smart.event.event_management_system.dto.EventResponseDto;
 import com.smart.event.event_management_system.entity.Event;
 import com.smart.event.event_management_system.service.EventService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
@@ -23,7 +25,7 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventResponseDto> createEvent(@RequestBody EventRequestDto dto) {
+    public ResponseEntity<EventResponseDto> createEvent(@Valid @RequestBody EventRequestDto dto) {
 
         Event event = new Event();
         event.setTitle(dto.getTitle());
