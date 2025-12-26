@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.smart.event.event_management_system.entity.Event;
 import com.smart.event.event_management_system.entity.Event_status;
 import com.smart.event.event_management_system.entity.User;
+import com.smart.event.event_management_system.exception.ResourceNotFoundException;
 import com.smart.event.event_management_system.repository.EventRepository;
 import com.smart.event.event_management_system.repository.UserRepository;
 import com.smart.event.event_management_system.service.EventService;
@@ -27,7 +28,7 @@ public class EventServiceImpl implements EventService{
     @Override
     public Event createEvent(Event event, Long organizerId) {
         User organizer = userRepository.findById(organizerId)
-                .orElseThrow(() -> new RuntimeException("Organizer not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Organizer not found"));
 
         event.setorganizerid(organizer);
         event.seteStatus(Event_status.ACTIVE);
@@ -53,13 +54,13 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public Event getEventById(Integer eventId) {
+    public Event getEventById(Long eventId) {
         return eventRepository.findByeid(eventId)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
     }
 
     @Override
-    public void cancelEvent(Integer eventId) {
+    public void cancelEvent(Long eventId) {
         Event event = getEventById(eventId);
         event.seteStatus(Event_status.CANCELLED);
         eventRepository.save(event);

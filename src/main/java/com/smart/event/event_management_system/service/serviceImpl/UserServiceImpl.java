@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.smart.event.event_management_system.entity.User;
+import com.smart.event.event_management_system.exception.ResourceNotFoundException;
 import com.smart.event.event_management_system.repository.UserRepository;
 import com.smart.event.event_management_system.service.UserService;
 
@@ -27,13 +28,13 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserById(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
     }
 
     @Override
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Email not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Email not found"));
     }
     
     @Override

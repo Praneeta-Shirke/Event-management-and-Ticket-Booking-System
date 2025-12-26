@@ -10,6 +10,6 @@ public interface EventService {
     List<Event> getAllEvents();
     List<Event> getActiveEvents();
     List<Event> getEventsByDate(LocalDate date);
-    Event getEventById(Integer eventId);
-    void cancelEvent(Integer eventId);
+    Event getEventById(Long eventId);
+    void cancelEvent(Long eventId);
 }

@@ -8,6 +8,7 @@ import com.smart.event.event_management_system.entity.Booking;
 import com.smart.event.event_management_system.service.PaymentService;
 import com.smart.event.event_management_system.entity.Payment;
 import com.smart.event.event_management_system.entity.Payment_status;
+import com.smart.event.event_management_system.exception.ResourceNotFoundException;
 import com.smart.event.event_management_system.repository.BookingRepository;
 import com.smart.event.event_management_system.repository.PaymentRepository;
 
@@ -26,7 +27,7 @@ public class PaymentServiceImpl implements PaymentService {
     public Payment makePayment(Long bookingId, String mode) {
 
         Booking booking = bookingRepository.findById(bookingId.longValue())
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
 
         Payment payment = new Payment();
         payment.setbooking(booking);

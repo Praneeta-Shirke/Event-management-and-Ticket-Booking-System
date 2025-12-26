@@ -9,6 +9,8 @@ import com.smart.event.event_management_system.entity.Booking;
 import com.smart.event.event_management_system.entity.Booking_status;
 import com.smart.event.event_management_system.entity.Event;
 import com.smart.event.event_management_system.entity.User;
+import com.smart.event.event_management_system.exception.BadRequestException;
+import com.smart.event.event_management_system.exception.ResourceNotFoundException;
 import com.smart.event.event_management_system.repository.BookingRepository;
 import com.smart.event.event_management_system.repository.EventRepository;
 import com.smart.event.event_management_system.repository.UserRepository;
@@ -35,14 +37,14 @@ public class BookingServiceImpl implements BookingService {
     public Booking createBooking(Long userId, Long eventId, int tickets) {
 
         Event event = eventRepository.findByeid(eventId)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
 
         if (event.getavailableTickets() < tickets) {
-            throw new RuntimeException("Not enough tickets");
+            throw new BadRequestException("Not enough tickets");
         }
 
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         Booking booking = new Booking();
         booking.setuser(user);
@@ -60,21 +62,21 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> getBookingsByUser(Long userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         return bookingRepository.findByuser(user);
     }
 
     @Override
     public List<Booking> getBookingsByEvent(Integer eventId) {
         Event event = eventRepository.findByeid(eventId)
-                .orElseThrow(() -> new RuntimeException("Event not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
         return bookingRepository.findByevent(event);
     }
 
     @Override
     public void cancelBooking(Integer bookingId) {
         Booking booking = bookingRepository.findById(bookingId.longValue())
-                .orElseThrow(() -> new RuntimeException("Booking not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
         booking.setbStatus(Booking_status.CANCELLED);
         bookingRepository.save(booking);
     }
