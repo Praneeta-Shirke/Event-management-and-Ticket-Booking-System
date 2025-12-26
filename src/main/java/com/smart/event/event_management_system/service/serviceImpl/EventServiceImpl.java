@@ -31,7 +31,8 @@ public class EventServiceImpl implements EventService{
 
         event.setorganizerid(organizer);
         event.seteStatus(Event_status.ACTIVE);
-        event.setavailableTickets(event.gettotalTickets());
+        event.setavailableTickets(event.getTotalTickets());
+
 
         return eventRepository.save(event);
     }
@@ -53,7 +54,7 @@ public class EventServiceImpl implements EventService{
 
     @Override
     public Event getEventById(Integer eventId) {
-        return eventRepository.findByuid(eventId)
+        return eventRepository.findByeid(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
     }
 
@@ -63,4 +64,6 @@ public class EventServiceImpl implements EventService{
         event.seteStatus(Event_status.CANCELLED);
         eventRepository.save(event);
     }
+
+    
 }

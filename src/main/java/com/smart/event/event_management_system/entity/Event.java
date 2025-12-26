@@ -3,9 +3,13 @@ package com.smart.event.event_management_system.entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,14 +29,18 @@ public class Event {
     private LocalDate eventDate;
     private LocalTime time;
     private double price;
-    private int totalTickets;
+    @Column(name="total_tickets",nullable = false)
+    private int totalTickets = 0;
+    @Column(name="available_tickets")
     private int availableTickets;
     
-    @ManyToOne
-    @JoinColumn(name = "organizerid", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "organizer_id", nullable = false)
+    @JsonIgnore
     private User organizerid;
     
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private Event_status eStatus;
 
 
@@ -78,10 +86,10 @@ public class Event {
     public void setPrice(double price) {
         this.price = price;
     }
-    public int gettotalTickets() {
+    public int getTotalTickets() {
         return totalTickets;
     }
-    public void settotalTickets(int totalTickets) {
+    public void setTotalTickets(int totalTickets) {
         this.totalTickets = totalTickets;
     }
     public int getavailableTickets() {
@@ -123,13 +131,8 @@ public class Event {
     public String toString() {
         return "Event [eid=" + eid + ", title=" + title + ", description=" + description + ", location=" + location
                 + ", eventDate=" + eventDate + ", time=" + time + ", price=" + price + ", totalTickets=" + totalTickets
-                + ", availableTickets=" + availableTickets + ", organizerid=" + organizerid + ", eStatus="
-                + eStatus + ", geteid()=" + geteid() + ", getTitle()=" + getTitle() + ", getDescription()="
-                + getDescription() + ", getLocation()=" + getLocation() + ", getEventDate()=" + getEventDate()
-                + ", getTime()=" + getTime() + ", getPrice()=" + getPrice() + ", gettotalTickets()=" + gettotalTickets()
-                + ", getavailableTickets()=" + getavailableTickets() + ", getorganizerid()=" + getorganizerid()
-                + ", geteStatus()=" + geteStatus() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-                + ", toString()=" + super.toString() + "]";
+                + ", availableTickets=" + availableTickets + ", eStatus="
+                + eStatus + "]";
     }
 
     

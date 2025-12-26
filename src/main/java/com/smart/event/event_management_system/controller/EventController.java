@@ -24,6 +24,7 @@ public class EventController {
 
     @PostMapping
     public ResponseEntity<EventResponseDto> createEvent(@RequestBody EventRequestDto dto) {
+        System.out.println("............Events................");
 
         Event event = new Event();
         event.setTitle(dto.getTitle());
@@ -32,8 +33,9 @@ public class EventController {
         event.setEventDate(dto.getEventDate());
         event.setTime(dto.getTime());
         event.setPrice(dto.getPrice());
-        event.settotalTickets(dto.getTotalTickets());
+        event.setTotalTickets(dto.getTotalTickets());
 
+        System.out.println("Events................"+ event);
         Event saved = eventService.createEvent(event, dto.getOrganizerId());
 
         return new ResponseEntity<>(mapEvent(saved), HttpStatus.CREATED);
@@ -67,7 +69,7 @@ public class EventController {
         dto.setEventDate(event.getEventDate());
         dto.setTime(event.getTime());
         dto.setPrice(event.getPrice());
-        dto.setTotalTickets(event.gettotalTickets());
+        dto.setTotalTickets(event.getTotalTickets());
         dto.setAvailableTickets(event.getavailableTickets());
         dto.setStatus(event.geteStatus().name());
         dto.setOrganizerId(event.getorganizerid().getId());

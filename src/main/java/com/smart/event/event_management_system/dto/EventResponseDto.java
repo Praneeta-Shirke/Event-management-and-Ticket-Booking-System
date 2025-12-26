@@ -3,6 +3,7 @@ package com.smart.event.event_management_system.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+
 public class EventResponseDto {
     private Long eventId;
     private String title;

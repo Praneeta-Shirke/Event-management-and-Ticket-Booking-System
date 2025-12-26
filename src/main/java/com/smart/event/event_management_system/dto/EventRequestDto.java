@@ -3,14 +3,16 @@ package com.smart.event.event_management_system.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.smart.event.event_management_system.entity.User;
+
 public class EventRequestDto {
     private String title;
     private String description;
     private String location;
     private LocalDate eventDate;
     private LocalTime time;
-    private double price;
-    private int totalTickets;
+    private double price = 0.0;
+    private int totalTickets = 0;
     private Long organizerId;
     
     public String getTitle() {
