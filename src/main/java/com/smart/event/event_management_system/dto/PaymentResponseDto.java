@@ -3,23 +3,23 @@ package com.smart.event.event_management_system.dto;
 import java.time.LocalDate;
 
 public class PaymentResponseDto {
-    private Integer paymentId;
-    private Integer bookingId;
+    private Long paymentId;
+    private Long bookingId;
     private String mode;
     private String status;
     private LocalDate paymentDate;
 
     
-    public Integer getPaymentId() {
+    public Long getPaymentId() {
         return paymentId;
     }
-    public void setPaymentId(Integer paymentId) {
+    public void setPaymentId(Long paymentId) {
         this.paymentId = paymentId;
     }
-    public Integer getBookingId() {
+    public Long getBookingId() {
         return bookingId;
     }
-    public void setBookingId(Integer bookingId) {
+    public void setBookingId(Long bookingId) {
         this.bookingId = bookingId;
     }
     public String getMode() {

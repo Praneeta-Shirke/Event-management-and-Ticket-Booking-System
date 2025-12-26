@@ -3,18 +3,18 @@ package com.smart.event.event_management_system.dto;
 import java.time.LocalDate;
 
 public class BookingResponseDto {
-    private Integer bookingId;
+    private Long bookingId;
     private Long userId;
-    private Integer eventId;
+    private Long eventId;
     private int numberOfTickets;
     private double totalPrice;
     private LocalDate bookingDate;
     private String status;
     
-    public Integer getBookingId() {
+    public Long getBookingId() {
         return bookingId;
     }
-    public void setBookingId(Integer bookingId) {
+    public void setBookingId(Long bookingId) {
         this.bookingId = bookingId;
     }
     public Long getUserId() {
@@ -23,10 +23,10 @@ public class BookingResponseDto {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public Integer getEventId() {
+    public Long getEventId() {
         return eventId;
     }
-    public void setEventId(Integer eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
     public int getNumberOfTickets() {
