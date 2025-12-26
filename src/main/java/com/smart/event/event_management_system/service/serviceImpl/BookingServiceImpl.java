@@ -32,9 +32,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional
-    public Booking createBooking(Long userId, Integer eventId, int tickets) {
+    public Booking createBooking(Long userId, Long eventId, int tickets) {
 
-        Event event = eventRepository.findByuid(eventId)
+        Event event = eventRepository.findByeid(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
 
         if (event.getavailableTickets() < tickets) {
@@ -66,7 +66,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getBookingsByEvent(Integer eventId) {
-        Event event = eventRepository.findByuid(eventId)
+        Event event = eventRepository.findByeid(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
         return bookingRepository.findByevent(event);
     }

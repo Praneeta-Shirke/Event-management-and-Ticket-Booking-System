@@ -97,12 +97,8 @@ public class Booking {
     @Override
     public String toString() {
         return "Booking [bid=" + bid + ", user=" + user + ", event=" + event + ", numOfTickets=" + numOfTickets
-                + ", totalPrice =" + totalPrice+ ", bookingDate=" + bookingDate + ", bStatus=" + bStatus
-                + ", getbid()=" + getbid() + ", getuser()=" + getuser() + ", getevent()=" + getevent()
-                + ", getNumOfTickets()=" + getNumOfTickets() + ", gettotalPrice()=" + gettotalPrice()
-                + ", getBookingDate()=" + getBookingDate() + ", getbStatus()=" + getbStatus() + ", getClass()="
-                + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+                + ", totalPrice=" + totalPrice + ", bookingDate=" + bookingDate + ", bStatus=" + bStatus + "]";
     }
-
+    
     
 }
