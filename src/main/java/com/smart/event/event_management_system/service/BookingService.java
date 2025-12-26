@@ -1,0 +1,12 @@
+package com.smart.event.event_management_system.service;
+
+import java.util.List;
+
+import com.smart.event.event_management_system.entity.Booking;
+
+public interface BookingService {
+    Booking createBooking(Long userId, Integer eventId, int tickets);
+    List<Booking> getBookingsByUser(Long userId);
+    List<Booking> getBookingsByEvent(Integer eventId);
+    void cancelBooking(Integer bookingId);
+}
