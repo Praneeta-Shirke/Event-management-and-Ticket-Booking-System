@@ -1,8 +1,19 @@
 package com.smart.event.event_management_system.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class UserRequestDto {
+    @NotBlank
     private String name;
+
+    @Email
+    @NotBlank
     private String email;
+
+    @NotBlank
+    @Size(min=4)
     private String password;
     private String role;
 

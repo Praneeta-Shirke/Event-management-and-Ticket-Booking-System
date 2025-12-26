@@ -1,8 +1,16 @@
 package com.smart.event.event_management_system.dto;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 public class BookingRequestDto {
+    @NotNull
     private Long userId;
+
+    @NotNull
     private Long eventId;
+
+    @Min(1)
     private int numberOfTickets;
     
     public Long getUserId() {

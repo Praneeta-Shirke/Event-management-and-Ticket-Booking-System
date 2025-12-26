@@ -3,15 +3,26 @@ package com.smart.event.event_management_system.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.smart.event.event_management_system.entity.User;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class EventRequestDto {
+    @NotBlank
     private String title;
     private String description;
     private String location;
+
+    @NotNull
     private LocalDate eventDate;
     private LocalTime time;
+
+    @Positive
     private double price = 0.0;
+
+    @Min(10)
     private int totalTickets = 0;
     private Long organizerId;
     
