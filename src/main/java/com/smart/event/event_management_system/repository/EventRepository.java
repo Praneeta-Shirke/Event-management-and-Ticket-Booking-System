@@ -2,6 +2,7 @@ package com.smart.event.event_management_system.repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,5 @@ public interface EventRepository extends JpaRepository<Event,Long>{
     List<Event> findByeStatus(Event_status eStatus);
     List<Event> findByorganizerid(Long organizerId);
     List<Event> findAll();
+    Optional<Event> findByuid(Integer eventId);
 }

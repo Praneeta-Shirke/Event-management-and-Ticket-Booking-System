@@ -58,6 +58,9 @@ public class Payment {
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
+    public Payment() {
+    }
+
     public Payment(long pid, Booking booking, String mode, Payment_status pStatus, LocalDate paymentDate) {
         this.pid = pid;
         this.booking = booking;
