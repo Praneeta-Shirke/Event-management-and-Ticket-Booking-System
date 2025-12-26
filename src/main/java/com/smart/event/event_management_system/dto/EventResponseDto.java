@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class EventResponseDto {
-    private Integer eventId;
+    private Long eventId;
     private String title;
     private String description;
     private String location;
@@ -16,10 +16,10 @@ public class EventResponseDto {
     private String status;
     private Long organizerId;
     
-    public Integer getEventId() {
+    public Long getEventId() {
         return eventId;
     }
-    public void setEventId(Integer eventId) {
+    public void setEventId(Long eventId) {
         this.eventId = eventId;
     }
     public String getTitle() {
