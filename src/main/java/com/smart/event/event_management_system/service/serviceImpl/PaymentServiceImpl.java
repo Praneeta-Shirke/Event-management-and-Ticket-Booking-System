@@ -23,7 +23,7 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public Payment makePayment(Integer bookingId, String mode) {
+    public Payment makePayment(Long bookingId, String mode) {
 
         Booking booking = bookingRepository.findById(bookingId.longValue())
                 .orElseThrow(() -> new RuntimeException("Booking not found"));

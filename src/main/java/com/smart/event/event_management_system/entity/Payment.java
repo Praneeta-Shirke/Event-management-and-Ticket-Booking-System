@@ -71,11 +71,9 @@ public class Payment {
     @Override
     public String toString() {
         return "Payment [pid=" + pid + ", booking=" + booking + ", mode=" + mode + ", pStatus=" + pStatus
-                + ", paymentDate=" + paymentDate + ", getpid()=" + getpid() + ", getbooking()=" + getbooking()
-                + ", getMode()=" + getMode() + ", getpStatus()=" + getpStatus() + ", getPaymentDate()="
-                + getPaymentDate() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
-                + super.toString() + "]";
+                + ", paymentDate=" + paymentDate + "]";
     }
+    
 
     
 
