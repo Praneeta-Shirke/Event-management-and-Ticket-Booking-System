@@ -67,14 +67,14 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> getBookingsByEvent(Integer eventId) {
+    public List<Booking> getBookingsByEvent(Long eventId) {
         Event event = eventRepository.findByeid(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
         return bookingRepository.findByevent(event);
     }
 
     @Override
-    public void cancelBooking(Integer bookingId) {
+    public void cancelBooking(Long bookingId) {
         Booking booking = bookingRepository.findById(bookingId.longValue())
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
         booking.setbStatus(Booking_status.CANCELLED);

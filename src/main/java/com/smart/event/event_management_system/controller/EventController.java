@@ -50,12 +50,12 @@ public class EventController {
     }
 
     @GetMapping("/{id}")
-    public EventResponseDto getEventById(@PathVariable Integer id) {
+    public EventResponseDto getEventById(@PathVariable Long id) {
         return mapEvent(eventService.getEventById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> cancelEvent(@PathVariable Integer id) {
+    public ResponseEntity<String> cancelEvent(@PathVariable Long id) {
         eventService.cancelEvent(id);
         return ResponseEntity.ok("Event cancelled successfully");
     }
