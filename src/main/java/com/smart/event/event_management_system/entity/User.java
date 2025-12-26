@@ -62,6 +62,9 @@ public class User {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+    public User() {
+    }
+
     public User(Long uid, String name, String email, String password, Role role, LocalDateTime createdAt) {
         this.uid = uid;
         this.name = name;

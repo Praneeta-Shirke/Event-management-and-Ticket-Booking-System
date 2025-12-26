@@ -1,4 +1,4 @@
-package com.smart.event.controller;
+package com.smart.event.event_management_system.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.smart.event.event_management_system.dto.EventRequestDto;
 import com.smart.event.event_management_system.dto.EventResponseDto;
 import com.smart.event.event_management_system.entity.Event;
 import com.smart.event.event_management_system.service.EventService;
@@ -22,7 +23,7 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<EventResponseDto> createEvent(@RequestBody EventRequestDTO dto) {
+    public ResponseEntity<EventResponseDto> createEvent(@RequestBody EventRequestDto dto) {
 
         Event event = new Event();
         event.setTitle(dto.getTitle());
@@ -31,7 +32,7 @@ public class EventController {
         event.setEventDate(dto.getEventDate());
         event.setTime(dto.getTime());
         event.setPrice(dto.getPrice());
-        event.setTotal_Ticket(dto.getTotalTickets());
+        event.settotalTickets(dto.getTotalTickets());
 
         Event saved = eventService.createEvent(event, dto.getOrganizerId());
 

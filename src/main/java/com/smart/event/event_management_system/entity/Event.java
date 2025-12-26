@@ -116,6 +116,9 @@ public class Event {
         this.organizerid = organizerid;
         this.eStatus = eStatus;
     }
+    public Event() {
+        //TODO Auto-generated constructor stub
+    }
     @Override
     public String toString() {
         return "Event [eid=" + eid + ", title=" + title + ", description=" + description + ", location=" + location
