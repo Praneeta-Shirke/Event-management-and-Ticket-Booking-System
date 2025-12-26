@@ -82,6 +82,8 @@ public class Booking {
     public void setbStatus(Booking_status bStatus) {
         this.bStatus = bStatus;
     }
+    public Booking() {}
+
     public Booking(long bid, User user, Event event, int numOfTickets, double totalPrice
 , LocalDate bookingDate,
             Booking_status bStatus) {
@@ -92,9 +94,6 @@ public class Booking {
         this.totalPrice
  = totalPrice
 ;
-        this.bookingDate = bookingDate;
-        this.bStatus = bStatus;
-    }
     @Override
     public String toString() {
         return "Booking [bid=" + bid + ", user=" + user + ", event=" + event + ", numOfTickets=" + numOfTickets
