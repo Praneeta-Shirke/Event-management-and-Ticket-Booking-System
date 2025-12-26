@@ -1,6 +1,7 @@
 package com.smart.event.event_management_system.service.serviceImpl;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.smart.event.event_management_system.entity.User;
 import com.smart.event.event_management_system.repository.UserRepository;
@@ -30,5 +31,10 @@ public class UserServiceImpl implements UserService{
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Email not found"));
+    }
+    
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
