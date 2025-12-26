@@ -1,0 +1,28 @@
+package com.smart.event.event_management_system.dto;
+
+public class BookingRequestDto {
+    private Long userId;
+    private Integer eventId;
+    private int numberOfTickets;
+    
+    public Long getUserId() {
+        return userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+    public Integer getEventId() {
+        return eventId;
+    }
+    public void setEventId(Integer eventId) {
+        this.eventId = eventId;
+    }
+    public int getNumberOfTickets() {
+        return numberOfTickets;
+    }
+    public void setNumberOfTickets(int numberOfTickets) {
+        this.numberOfTickets = numberOfTickets;
+    }
+
+    
+}
