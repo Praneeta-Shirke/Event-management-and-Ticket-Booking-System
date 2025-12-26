@@ -5,8 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.smart.event.event_management_system.repository.UserRepository;
-
+import com.smart.event.event_management_system.service.EventService;
 
 @SpringBootApplication
 public class EventManagementSystemApplication {
@@ -16,9 +15,9 @@ public class EventManagementSystemApplication {
     }
 
     @Bean
-    CommandLineRunner test(UserRepository userRepo) {
+    CommandLineRunner test(EventService eventService) {
         return args -> {
-            System.out.println("Users in DB: " + userRepo.findAll());
+            System.out.println(eventService.getActiveEvents());
         };
     }
 }

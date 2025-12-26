@@ -92,8 +92,8 @@ public class Booking {
         this.event = event;
         this.numOfTickets = numOfTickets;
         this.totalPrice
- = totalPrice
-;
+ = totalPrice;
+            }
     @Override
     public String toString() {
         return "Booking [bid=" + bid + ", user=" + user + ", event=" + event + ", numOfTickets=" + numOfTickets

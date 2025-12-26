@@ -4,5 +4,6 @@ public enum Event_status {
     PENDING,
     APPROVED,
     REJECTED,
-    CANCELLED
+    CANCELLED,
+    ACTIVE
 }

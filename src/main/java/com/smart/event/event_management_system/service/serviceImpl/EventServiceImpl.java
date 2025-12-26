@@ -29,9 +29,9 @@ public class EventServiceImpl implements EventService{
         User organizer = userRepository.findById(organizerId)
                 .orElseThrow(() -> new RuntimeException("Organizer not found"));
 
-        event.setOrganizer_Id(organizer);
-        event.setE_status(Event_status.ACTIVE);
-        event.setAvailable_tickets(event.getTotal_Ticket());
+        event.setorganizerid(organizer);
+        event.seteStatus(Event_status.ACTIVE);
+        event.setavailableTickets(event.gettotalTickets());
 
         return eventRepository.save(event);
     }
@@ -43,7 +43,7 @@ public class EventServiceImpl implements EventService{
 
     @Override
     public List<Event> getActiveEvents() {
-        return eventRepository.findByEStatus(Event_status.ACTIVE);
+        return eventRepository.findByeStatus(Event_status.ACTIVE);
     }
 
     @Override
@@ -53,14 +53,14 @@ public class EventServiceImpl implements EventService{
 
     @Override
     public Event getEventById(Integer eventId) {
-        return eventRepository.findById(eventId)
+        return eventRepository.findByuid(eventId)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
     }
 
     @Override
     public void cancelEvent(Integer eventId) {
         Event event = getEventById(eventId);
-        event.setE_status(Event_status.CANCELLED);
+        event.seteStatus(Event_status.CANCELLED);
         eventRepository.save(event);
     }
 }
