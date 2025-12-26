@@ -11,9 +11,9 @@ import com.smart.event.event_management_system.entity.Event_status;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event,Long>{
-    List<Event> findByDate(LocalDate date);
+    List<Event> findByEventDate(LocalDate date);
     List<Event> findByLocation(String Location);
-    List<Event> findByStatusEvents(Event_status status);
-    List<Event> findByOrganizerId_UId(Long organizerId);
+    List<Event> findByeStatus(Event_status eStatus);
+    List<Event> findByorganizerid(Long organizerId);
     List<Event> findAll();
 }

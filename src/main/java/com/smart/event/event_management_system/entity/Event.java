@@ -29,8 +29,8 @@ public class Event {
     private int availableTickets;
     
     @ManyToOne
-    @JoinColumn(name = "organizer_id", nullable = false)
-    private User organizer_Id;
+    @JoinColumn(name = "organizerid", nullable = false)
+    private User organizerid;
     
     @Enumerated(EnumType.STRING)
     private Event_status eStatus;
@@ -90,11 +90,11 @@ public class Event {
     public void setavailableTickets(int availableTickets) {
         this.availableTickets = availableTickets;
     }
-    public User getOrganizer_Id() {
-        return organizer_Id;
+    public User getorganizerid() {
+        return organizerid;
     }
-    public void setOrganizer_Id(User organizer_Id) {
-        this.organizer_Id = organizer_Id;
+    public void setorganizerid(User organizerid) {
+        this.organizerid = organizerid;
     }
     public Event_status geteStatus() {
         return eStatus;
@@ -103,7 +103,7 @@ public class Event {
         this.eStatus = eStatus;
     }
     public Event(long eid, String title, String description, String location, LocalDate eventDate, LocalTime time,
-            double price, int totalTickets, int availableTickets, User organizer_Id, Event_status eStatus) {
+            double price, int totalTickets, int availableTickets, User organizerid, Event_status eStatus) {
         this.eid = eid;
         this.title = title;
         this.description = description;
@@ -113,18 +113,18 @@ public class Event {
         this.price = price;
         this.totalTickets = totalTickets;
         this.availableTickets = availableTickets;
-        this.organizer_Id = organizer_Id;
+        this.organizerid = organizerid;
         this.eStatus = eStatus;
     }
     @Override
     public String toString() {
         return "Event [eid=" + eid + ", title=" + title + ", description=" + description + ", location=" + location
                 + ", eventDate=" + eventDate + ", time=" + time + ", price=" + price + ", totalTickets=" + totalTickets
-                + ", availableTickets=" + availableTickets + ", organizer_Id=" + organizer_Id + ", eStatus="
+                + ", availableTickets=" + availableTickets + ", organizerid=" + organizerid + ", eStatus="
                 + eStatus + ", geteid()=" + geteid() + ", getTitle()=" + getTitle() + ", getDescription()="
                 + getDescription() + ", getLocation()=" + getLocation() + ", getEventDate()=" + getEventDate()
                 + ", getTime()=" + getTime() + ", getPrice()=" + getPrice() + ", gettotalTickets()=" + gettotalTickets()
-                + ", getavailableTickets()=" + getavailableTickets() + ", getOrganizer_Id()=" + getOrganizer_Id()
+                + ", getavailableTickets()=" + getavailableTickets() + ", getorganizerid()=" + getorganizerid()
                 + ", geteStatus()=" + geteStatus() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
                 + ", toString()=" + super.toString() + "]";
     }

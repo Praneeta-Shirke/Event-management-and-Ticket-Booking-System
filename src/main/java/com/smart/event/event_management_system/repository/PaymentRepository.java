@@ -11,7 +11,7 @@ import com.smart.event.event_management_system.entity.Payment_status;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment,Long>{
-    List<Payment> findBybid(Booking bid);
-    List<Payment> findBypStaus(Payment_status pStatus);
+    List<Payment> findBybooking(Booking bid);
+    List<Payment> findBypStatus(Payment_status pStatus);
     List<Payment> findAll();
 }

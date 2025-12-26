@@ -12,8 +12,8 @@ import com.smart.event.event_management_system.entity.User;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking,Long>{
-    List<Booking> findByuid(User uid);
-    List<Booking> findByeid(Event eid);
+    List<Booking> findByuser(User uid);
+    List<Booking> findByevent(Event eid);
     List<Booking> findBybStatus(Booking_status bstatus);
     List<Booking> findAll();
 }
