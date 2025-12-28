@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import com.smart.event.event_management_system.dto.BookingRequestDto;
 import com.smart.event.event_management_system.dto.BookingResponseDto;
 import com.smart.event.event_management_system.entity.Booking;
+import com.smart.event.event_management_system.security.JwtUtil;
 import com.smart.event.event_management_system.service.BookingService;
+import com.smart.event.event_management_system.service.serviceImpl.BookingServiceImpl;
 
 
 @RestController
@@ -17,9 +19,12 @@ import com.smart.event.event_management_system.service.BookingService;
 public class BookingController {
 
     private final BookingService bookingService;
+    private final BookingServiceImpl bookingServiceImpl;
+    private final JwtUtil jwtUtil;
 
-    public BookingController(BookingService bookingService) {
+    public BookingController(BookingService bookingService, JwtUtil jwtUtil) {
         this.bookingService = bookingService;
+        this.jwtUtil = jwtUtil;
     }
     
     @PreAuthorize("hasRole('USER')")
@@ -53,5 +58,11 @@ public class BookingController {
         dto.setBookingDate(booking.getBookingDate());
         dto.setStatus(booking.getBStatus().name());
         return dto;
+    }
+
+    @GetMapping("/my-bookings")
+    public List<Booking> myBookings(@RequestHeader("Authorization") String token) {
+        String email = jwtUtil.extractEmail(token.substring(7));
+        return bookingServiceImpl.getMyBookings(email);
     }
 }

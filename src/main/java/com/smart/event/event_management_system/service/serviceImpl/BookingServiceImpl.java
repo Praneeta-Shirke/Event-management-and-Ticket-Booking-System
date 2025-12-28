@@ -80,4 +80,10 @@ public class BookingServiceImpl implements BookingService {
         booking.setBStatus(Booking_status.CANCELLED);
         bookingRepository.save(booking);
     }
+
+    public List<Booking> getMyBookings(String email) {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow();
+        return bookingRepository.findByUser_UId(user.getUId());
+}
 }
