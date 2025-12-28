@@ -6,13 +6,31 @@ import org.springframework.stereotype.Component;
 
 import com.smart.event.event_management_system.entity.User;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtUtil {
 
-    private final String SECRET = "very_secret_key";
+    private static final String SECRET =
+            "my_super_secret_key_which_is_at_least_32_chars";
+
+    private Claims extractClaims(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(SECRET.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    public String extractEmail(String token) {
+        return extractClaims(token).getSubject();
+    }
+
+    public String extractRole(String token) {
+        return extractClaims(token).get("role", String.class);
+    }
 
     public String generateToken(User user) {
         return Jwts.builder()
