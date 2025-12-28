@@ -28,10 +28,10 @@ public class PaymentController {
         );
 
         PaymentResponseDto response = new PaymentResponseDto();
-        response.setPaymentId(payment.getpid());
-        response.setBookingId(payment.getbooking().getbid());
+        response.setPaymentId(payment.getPid());
+        response.setBookingId(payment.getBooking().getBid());
         response.setMode(payment.getMode());
-        response.setStatus(payment.getpStatus().name());
+        response.setStatus(payment.getPStatus().name());
         response.setPaymentDate(payment.getPaymentDate());
 
         return response;

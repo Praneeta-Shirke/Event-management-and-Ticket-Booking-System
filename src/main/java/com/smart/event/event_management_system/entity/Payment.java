@@ -28,16 +28,16 @@ public class Payment {
     private Payment_status pStatus;
     private LocalDate paymentDate;
 
-    public long getpid() {
+    public long getPid() {
         return pid;
     }
-    public void setpid(long pid) {
+    public void setPid(long pid) {
         this.pid = pid;
     }
-    public Booking getbooking() {
+    public Booking getBooking() {
         return booking;
     }
-    public void setbooking(Booking booking) {
+    public void setBooking(Booking booking) {
         this.booking = booking;
     }
     public String getMode() {
@@ -46,10 +46,10 @@ public class Payment {
     public void setMode(String mode) {
         this.mode = mode;
     }
-    public Payment_status getpStatus() {
+    public Payment_status getPStatus() {
         return pStatus;
     }
-    public void setpStatus(Payment_status pStatus) {
+    public void setPStatus(Payment_status pStatus) {
         this.pStatus = pStatus;
     }
     public LocalDate getPaymentDate() {

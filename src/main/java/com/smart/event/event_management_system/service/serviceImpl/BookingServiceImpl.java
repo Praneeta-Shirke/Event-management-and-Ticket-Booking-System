@@ -36,10 +36,10 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public Booking createBooking(Long userId, Long eventId, int tickets) {
 
-        Event event = eventRepository.findByeid(eventId)
+        Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
 
-        if (event.getavailableTickets() < tickets) {
+        if (event.getAvailableTickets() < tickets) {
             throw new BadRequestException("Not enough tickets");
         }
 
@@ -47,14 +47,14 @@ public class BookingServiceImpl implements BookingService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         Booking booking = new Booking();
-        booking.setuser(user);
-        booking.setevent(event);
+        booking.setUser(user);
+        booking.setEvent(event);
         booking.setNumOfTickets(tickets);
-        booking.settotalPrice(tickets * event.getPrice());
+        booking.setTotalPrice(tickets * event.getPrice());
         booking.setBookingDate(LocalDate.now());
-        booking.setbStatus(Booking_status.CONFIRMED);
+        booking.setBStatus(Booking_status.CONFIRMED);
 
-        event.setavailableTickets(event.getavailableTickets() - tickets);
+        event.setAvailableTickets(event.getAvailableTickets() - tickets);
 
         return bookingRepository.save(booking);
     }
@@ -68,7 +68,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getBookingsByEvent(Long eventId) {
-        Event event = eventRepository.findByeid(eventId)
+        Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
         return bookingRepository.findByevent(event);
     }
@@ -77,7 +77,7 @@ public class BookingServiceImpl implements BookingService {
     public void cancelBooking(Long bookingId) {
         Booking booking = bookingRepository.findById(bookingId.longValue())
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
-        booking.setbStatus(Booking_status.CANCELLED);
+        booking.setBStatus(Booking_status.CANCELLED);
         bookingRepository.save(booking);
     }
 }

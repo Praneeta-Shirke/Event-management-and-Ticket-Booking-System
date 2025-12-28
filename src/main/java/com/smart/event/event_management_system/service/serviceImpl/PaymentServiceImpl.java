@@ -30,9 +30,9 @@ public class PaymentServiceImpl implements PaymentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
 
         Payment payment = new Payment();
-        payment.setbooking(booking);
+        payment.setBooking(booking);
         payment.setMode(mode);
-        payment.setpStatus(Payment_status.SUCCESS);
+        payment.setPStatus(Payment_status.SUCCESS);
         payment.setPaymentDate(LocalDate.now());
 
         return paymentRepository.save(payment);

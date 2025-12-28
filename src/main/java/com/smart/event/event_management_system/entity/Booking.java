@@ -35,22 +35,22 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private Booking_status bStatus;
 
-    public long getbid() {
+    public long getBid() {
         return bid;
     }
-    public void setbid(long bid) {
+    public void setBid(long bid) {
         this.bid = bid;
     }
-    public User getuser() {
+    public User getUser() {
         return user;
     }
-    public void setuser(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
-    public Event getevent() {
+    public Event getEvent() {
         return event;
     }
-    public void setevent(Event event) {
+    public void setEvent(Event event) {
         this.event = event;
     }
     public int getNumOfTickets() {
@@ -59,11 +59,11 @@ public class Booking {
     public void setNumOfTickets(int numOfTickets) {
         this.numOfTickets = numOfTickets;
     }
-    public double gettotalPrice() {
+    public double getTotalPrice() {
         return totalPrice
 ;
     }
-    public void settotalPrice(double totalPrice
+    public void setTotalPrice(double totalPrice
 
     ) {
         this.totalPrice
@@ -76,10 +76,10 @@ public class Booking {
     public void setBookingDate(LocalDate bookingDate) {
         this.bookingDate = bookingDate;
     }
-    public Booking_status getbStatus() {
+    public Booking_status getBStatus() {
         return bStatus;
     }
-    public void setbStatus(Booking_status bStatus) {
+    public void setBStatus(Booking_status bStatus) {
         this.bStatus = bStatus;
     }
     public Booking() {}

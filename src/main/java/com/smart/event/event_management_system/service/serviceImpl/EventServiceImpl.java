@@ -30,9 +30,9 @@ public class EventServiceImpl implements EventService{
         User organizer = userRepository.findById(organizerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Organizer not found"));
 
-        event.setorganizerid(organizer);
-        event.seteStatus(Event_status.ACTIVE);
-        event.setavailableTickets(event.getTotalTickets());
+        event.setOrganizerid(organizer);
+        event.setEStatus(Event_status.ACTIVE);
+        event.setAvailableTickets(event.getTotalTickets());
 
 
         return eventRepository.save(event);
@@ -55,14 +55,16 @@ public class EventServiceImpl implements EventService{
 
     @Override
     public Event getEventById(Long eventId) {
-        return eventRepository.findByeid(eventId)
+        return eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found"));
     }
 
     @Override
     public void cancelEvent(Long eventId) {
-        Event event = getEventById(eventId);
-        event.seteStatus(Event_status.CANCELLED);
+        Event event = eventRepository.findById(eventId)
+        .orElseThrow(() -> new ResourceNotFoundException("Event not found with id " + eventId));
+
+        event.setEStatus(Event_status.CANCELLED);
         eventRepository.save(event);
     }
 

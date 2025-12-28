@@ -3,6 +3,7 @@ package com.smart.event.event_management_system.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.smart.event.event_management_system.dto.BookingRequestDto;
@@ -20,7 +21,8 @@ public class BookingController {
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
-
+    
+    @PreAuthorize("hasRole('USER')")
     @PostMapping
     public BookingResponseDto createBooking(@RequestBody BookingRequestDto dto) {
 
@@ -43,13 +45,13 @@ public class BookingController {
 
     private BookingResponseDto mapBooking(Booking booking) {
         BookingResponseDto dto = new BookingResponseDto();
-        dto.setBookingId(booking.getbid());
-        dto.setUserId(booking.getuser().getId());
-        dto.setEventId(booking.getevent().geteid());
+        dto.setBookingId(booking.getBid());
+        dto.setUserId(booking.getUser().getId());
+        dto.setEventId(booking.getEvent().getEid());
         dto.setNumberOfTickets(booking.getNumOfTickets());
-        dto.setTotalPrice(booking.gettotalPrice());
+        dto.setTotalPrice(booking.getTotalPrice());
         dto.setBookingDate(booking.getBookingDate());
-        dto.setStatus(booking.getbStatus().name());
+        dto.setStatus(booking.getBStatus().name());
         return dto;
     }
 }

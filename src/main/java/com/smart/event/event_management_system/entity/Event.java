@@ -44,10 +44,10 @@ public class Event {
     private Event_status eStatus;
 
 
-    public long geteid() {
+    public long getEid() {
         return eid;
     }
-    public void seteid(long eid) {
+    public void setEid(long eid) {
         this.eid = eid;
     }
     public String getTitle() {
@@ -92,22 +92,22 @@ public class Event {
     public void setTotalTickets(int totalTickets) {
         this.totalTickets = totalTickets;
     }
-    public int getavailableTickets() {
+    public int getAvailableTickets() {
         return availableTickets;
     }
-    public void setavailableTickets(int availableTickets) {
+    public void setAvailableTickets(int availableTickets) {
         this.availableTickets = availableTickets;
     }
-    public User getorganizerid() {
+    public User getOrganizerid() {
         return organizerid;
     }
-    public void setorganizerid(User organizerid) {
+    public void setOrganizerid(User organizerid) {
         this.organizerid = organizerid;
     }
-    public Event_status geteStatus() {
+    public Event_status getEStatus() {
         return eStatus;
     }
-    public void seteStatus(Event_status eStatus) {
+    public void setEStatus(Event_status eStatus) {
         this.eStatus = eStatus;
     }
     public Event(long eid, String title, String description, String location, LocalDate eventDate, LocalTime time,

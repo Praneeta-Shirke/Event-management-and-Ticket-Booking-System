@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.smart.event.event_management_system.dto.EventRequestDto;
@@ -24,6 +25,7 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    @PreAuthorize("hasRole('ORGANIZER')")
     @PostMapping
     public ResponseEntity<EventResponseDto> createEvent(@Valid @RequestBody EventRequestDto dto) {
 
@@ -55,14 +57,16 @@ public class EventController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> cancelEvent(@PathVariable Long id) {
         eventService.cancelEvent(id);
+        System.out.println("CANCEL EVENT CONTROLLER HIT: " + id);
         return ResponseEntity.ok("Event cancelled successfully");
     }
 
     private EventResponseDto mapEvent(Event event) {
         EventResponseDto dto = new EventResponseDto();
-        dto.setEventId(event.geteid());
+        dto.setEventId(event.getEid());
         dto.setTitle(event.getTitle());
         dto.setDescription(event.getDescription());
         dto.setLocation(event.getLocation());
@@ -70,9 +74,9 @@ public class EventController {
         dto.setTime(event.getTime());
         dto.setPrice(event.getPrice());
         dto.setTotalTickets(event.getTotalTickets());
-        dto.setAvailableTickets(event.getavailableTickets());
-        dto.setStatus(event.geteStatus().name());
-        dto.setOrganizerId(event.getorganizerid().getId());
+        dto.setAvailableTickets(event.getAvailableTickets());
+        dto.setStatus(event.getEStatus().name());
+        dto.setOrganizerId(event.getOrganizerid().getId());
         return dto;
     }
 }
