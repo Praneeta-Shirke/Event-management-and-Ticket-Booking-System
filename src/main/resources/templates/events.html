@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Events</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>Available Events</header>
+
+<div class="container" id="events"></div>
+
+<script>
+fetch("/api/events", {
+    headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token")
+    }
+})
+.then(res => res.json())
+.then(data => {
+    const container = document.getElementById("events");
+    data.forEach(e => {
+        container.innerHTML += `
+            <div class="card">
+                <div class="flex">
+                    <strong>${e.title}</strong>
+                    <span>₹${e.price}</span>
+                </div>
+                <p class="small">${e.location} | ${e.eventDate}</p>
+                <button onclick="book(${e.eventId})">Book</button>
+            </div>
+        `;
+    });
+});
+
+function book(id) {
+    localStorage.setItem("eventId", id);
+    window.location.href = "/booking";
+}
+</script>
+
+</body>
+</html>

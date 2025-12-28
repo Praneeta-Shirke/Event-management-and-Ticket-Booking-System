@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Payment</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>Payment</header>
+
+<div class="container">
+    <select id="mode">
+        <option>UPI</option>
+        <option>Card</option>
+        <option>NetBanking</option>
+    </select>
+
+    <button onclick="pay()">Pay</button>
+</div>
+
+<script>
+function pay() {
+    fetch("/api/payments", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+            bookingId: localStorage.getItem("bookingId"),
+            mode: mode.value
+        })
+    }).then(() => alert("Payment Successful"));
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>Smart Event System</header>
+
+<div class="container">
+    <h2>Login</h2>
+
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <p class="small">New user? <a href="/register">Register here</a></p>
+</div>
+
+<script>
+function login() {
+    fetch("/api/auth/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            email: email.value,
+            password: password.value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
+        window.location.href = "/events";
+    });
+}
+</script>
+
+</body>
+</html>

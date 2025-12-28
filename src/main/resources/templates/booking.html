@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Booking</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header>Book Tickets</header>
+
+<div class="container">
+    <input id="tickets" type="number" placeholder="Number of tickets">
+    <button onclick="book()">Confirm Booking</button>
+</div>
+
+<script>
+function book() {
+    fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+            userId: 1,
+            eventId: localStorage.getItem("eventId"),
+            numberOfTickets: tickets.value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem("bookingId", data.bookingId);
+        window.location.href = "/payment";
+    });
+}
+</script>
+
+</body>
+</html>
