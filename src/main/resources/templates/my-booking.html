@@ -1,3 +1,35 @@
-fetch("/api/bookings/my-bookings", {
-  headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>My Booking History</header>
+
+<div class="container" id="bookings"></div>
+
+<script>
+fetch("/api/bookings/my", {
+    headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+    }
 })
+.then(res => res.json())
+.then(data => {
+    const div = document.getElementById("bookings");
+    data.forEach(b => {
+        div.innerHTML += `
+            <div class="card">
+                <strong>${b.eventTitle}</strong>
+                <p>Tickets: ${b.numberOfTickets}</p>
+                <p>Status: ${b.bookingStatus}</p>
+            </div>
+        `;
+    });
+});
+</script>
+
+</body>
+</html>

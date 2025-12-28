@@ -5,8 +5,9 @@ import java.util.List;
 
 import com.smart.event.event_management_system.entity.Event;
 
+
 public interface EventService {
-    Event createEvent(Event event, Long organizerId);
+    Event createEvent(Event event, Long email);
     List<Event> getAllEvents();
     List<Event> getActiveEvents();
     List<Event> getEventsByDate(LocalDate date);

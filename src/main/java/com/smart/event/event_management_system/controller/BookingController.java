@@ -19,12 +19,10 @@ import com.smart.event.event_management_system.service.serviceImpl.BookingServic
 public class BookingController {
 
     private final BookingService bookingService;
-    private final BookingServiceImpl bookingServiceImpl;
     private final JwtUtil jwtUtil;
 
-    public BookingController(BookingService bookingService, BookingServiceImpl bookingServiceImpl, JwtUtil jwtUtil) {
+    public BookingController(BookingService bookingService, JwtUtil jwtUtil) {
         this.bookingService = bookingService;
-        this.bookingServiceImpl = bookingServiceImpl;
         this.jwtUtil = jwtUtil;
     }
     
@@ -61,9 +59,18 @@ public class BookingController {
         return dto;
     }
 
-    @GetMapping("/my-bookings")
-    public List<Booking> myBookings(@RequestHeader("Authorization") String token) {
-        String email = jwtUtil.extractEmail(token.substring(7));
-        return bookingServiceImpl.getMyBookings(email);
-    }
+    @GetMapping("/my")
+@PreAuthorize("hasRole('USER')")
+public List<BookingResponseDto> myBookings(
+        @RequestHeader("Authorization") String authHeader) {
+
+    String token = authHeader.substring(7);
+    String email = jwtUtil.extractEmail(token);
+
+    return bookingService.getBookingsForLoggedInUser(email)
+            .stream()
+            .map(this::mapBooking)
+            .collect(Collectors.toList());
+}
+
 }

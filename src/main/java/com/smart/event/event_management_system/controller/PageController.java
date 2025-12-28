@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
+    @GetMapping("/my-bookings")
+    public String myBookings() {
+        return "my-bookings";
+    }
 
     @GetMapping("/login")
     public String login() { return "login"; }

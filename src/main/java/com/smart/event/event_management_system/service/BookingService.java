@@ -9,4 +9,5 @@ public interface BookingService {
     List<Booking> getBookingsByUser(Long userId);
     List<Booking> getBookingsByEvent(Long eventId);
     void cancelBooking(Long bookingId);
+    List<Booking> getBookingsForLoggedInUser(String email);
 }

@@ -11,6 +11,20 @@ public class BookingResponseDto {
     private LocalDate bookingDate;
     private String status;
     
+    public BookingResponseDto() {
+        // required for Jackson & manual mapping
+    }
+    
+    public BookingResponseDto(Long bookingId, Long userId, Long eventId, int numberOfTickets, double totalPrice,
+            LocalDate bookingDate, String status) {
+        this.bookingId = bookingId;
+        this.userId = userId;
+        this.eventId = eventId;
+        this.numberOfTickets = numberOfTickets;
+        this.totalPrice = totalPrice;
+        this.bookingDate = bookingDate;
+        this.status = status;
+    }
     public Long getBookingId() {
         return bookingId;
     }
