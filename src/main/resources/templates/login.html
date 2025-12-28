@@ -21,22 +21,45 @@
 
 <script>
 function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
     fetch("/api/auth/login", {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
-            email: email.value,
-            password: password.value
+            email: email,
+            password: password
         })
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Invalid credentials");
+        }
+        return res.json();
+    })
     .then(data => {
+        // Store auth details
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
-        window.location.href = "/events";
+
+        // Redirect based on role
+        if (data.role === "ADMIN") {
+            window.location.href = "/admin";
+        } else if (data.role === "ORGANIZER") {
+            window.location.href = "/organizer";
+        } else {
+            window.location.href = "/events";
+        }
+    })
+    .catch(err => {
+        alert(err.message);
     });
 }
 </script>
+
 
 </body>
 </html>

@@ -125,7 +125,6 @@ public class Event {
         this.eStatus = eStatus;
     }
     public Event() {
-        //TODO Auto-generated constructor stub
     }
     @Override
     public String toString() {

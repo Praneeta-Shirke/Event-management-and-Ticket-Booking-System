@@ -84,6 +84,6 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getMyBookings(String email) {
         User user = userRepository.findByEmail(email)
             .orElseThrow();
-        return bookingRepository.findByUser_UId(user.getUId());
+        return bookingRepository.findByUser_Id(user.getId());
 }
 }

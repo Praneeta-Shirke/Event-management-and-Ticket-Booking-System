@@ -22,8 +22,9 @@ public class BookingController {
     private final BookingServiceImpl bookingServiceImpl;
     private final JwtUtil jwtUtil;
 
-    public BookingController(BookingService bookingService, JwtUtil jwtUtil) {
+    public BookingController(BookingService bookingService, BookingServiceImpl bookingServiceImpl, JwtUtil jwtUtil) {
         this.bookingService = bookingService;
+        this.bookingServiceImpl = bookingServiceImpl;
         this.jwtUtil = jwtUtil;
     }
     
