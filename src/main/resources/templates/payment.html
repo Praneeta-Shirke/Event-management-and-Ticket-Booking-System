@@ -30,8 +30,11 @@ function pay() {
             bookingId: localStorage.getItem("bookingId"),
             mode: mode.value
         })
-    }).then(() => alert("Payment Successful"));
+    }).then(() => alert("Payment Successful")).then(() => {
+    window.location.replace("/events");
+});
 }
+
 </script>
 
 </body>
