@@ -53,6 +53,7 @@ Tools
   VS Code / Eclipse
   MySQL Workbench
   Git & GitHub
+  Postman
 
 🗄️ Database Design
 Main Tables
