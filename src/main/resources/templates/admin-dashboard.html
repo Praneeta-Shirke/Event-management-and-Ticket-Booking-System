@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>Admin Dashboard</header>
+
+<div class="container">
+
+    <h2>All Users</h2>
+    <div id="users"></div>
+
+    <hr style="margin:40px 0">
+
+    <h2>Create Admin</h2>
+
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="createAdmin()">Create Admin</button>
+
+</div>
+
+<script>
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+
+if (!token || role !== "ADMIN") {
+    alert("Access Denied");
+    window.location.href = "/login";
+}
+
+function loadUsers() {
+    fetch("/api/admin/users", {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        const div = document.getElementById("users");
+        div.innerHTML = "";
+        data.forEach(u => {
+            div.innerHTML += `
+                <div class="card">
+                    <strong>${u.name}</strong>
+                    <p>${u.email}</p>
+                    <p>Role: ${u.role}</p>
+                </div>
+            `;
+        });
+    });
+}
+
+function createAdmin() {
+    fetch("/api/admin/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+            name: name.value,
+            email: email.value,
+            password: password.value
+        })
+    })
+    .then(() => {
+        alert("Admin Created");
+        loadUsers();
+    });
+}
+
+loadUsers();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Organizer Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>Organizer Dashboard</header>
+
+<div class="container">
+
+    <h2>Create New Event</h2>
+
+    <input id="title" placeholder="Event Title">
+    <input id="description" placeholder="Description">
+    <input id="location" placeholder="Location">
+    <input id="eventDate" type="date">
+    <input id="time" type="time">
+    <input id="price" type="number" placeholder="Ticket Price">
+    <input id="totalTickets" type="number" placeholder="Total Tickets">
+
+    <button onclick="createEvent()">Create Event</button>
+
+    <hr style="margin:40px 0">
+
+    <h2>My Events</h2>
+    <div id="events"></div>
+
+</div>
+
+<script>
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+
+if (!token || role !== "ORGANIZER") {
+    alert("Access Denied");
+    window.location.href = "/login";
+}
+
+function createEvent() {
+    fetch("/api/events", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+            title: title.value,
+            description: description.value,
+            location: location.value,
+            eventDate: eventDate.value,
+            time: time.value,
+            price: price.value,
+            totalTicket: totalTickets.value
+        })
+    })
+    .then(() => {
+        alert("Event Created");
+        loadEvents();
+    });
+}
+
+function loadEvents() {
+    fetch("/api/events/my", {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        const div = document.getElementById("events");
+        div.innerHTML = "";
+        data.forEach(e => {
+            div.innerHTML += `
+                <div class="card">
+                    <strong>${e.title}</strong>
+                    <p>${e.location} | ${e.eventDate}</p>
+                    <p>Status: ${e.status}</p>
+                </div>
+            `;
+        });
+    });
+}
+
+loadEvents();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Smart Event Management</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        nav {
+            background: #1f2937;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .left a,
+        nav .right a {
+            color: white;
+            margin-right: 20px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        nav .left a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="left">
+        <strong>Smart Event System</strong>
+        <a href="/events">Events</a>
+        <a href="/my-bookings" id="bookingLink">My Bookings</a>
+        <a href="/organizer-dashboard" id="organizerLink" style="display:none">Organizer</a>
+        <a href="/admin-dashboard" id="adminLink" style="display:none">Admin</a>
+    </div>
+
+    <div class="right">
+        <span id="userRole"></span>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>Welcome to Smart Event Management</h1>
+    <p>Book events, manage tickets, and enjoy seamless experiences.</p>
+</div>
+
+<script>
+const role = localStorage.getItem("role");
+const token = localStorage.getItem("token");
+
+if (!token) {
+    window.location.href = "/login";
+}
+
+document.getElementById("userRole").innerText = role;
+
+if (role === "ADMIN") {
+    document.getElementById("adminLink").style.display = "inline";
+}
+
+if (role === "ORGANIZER") {
+    document.getElementById("organizerLink").style.display = "inline";
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.replace("/login");
+}
+</script>
+
+</body>
+</html>
