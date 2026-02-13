@@ -59,11 +59,9 @@ public class BookingController {
         return dto;
     }
 
-    @GetMapping("/my")
+@GetMapping("/my")
 @PreAuthorize("hasRole('USER')")
-public List<BookingResponseDto> myBookings(
-        @RequestHeader("Authorization") String authHeader) {
-
+public List<BookingResponseDto> myBookings(@RequestHeader("Authorization") String authHeader) {
     String token = authHeader.substring(7);
     String email = jwtUtil.extractEmail(token);
 

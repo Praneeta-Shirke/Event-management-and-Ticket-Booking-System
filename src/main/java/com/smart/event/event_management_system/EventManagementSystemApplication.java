@@ -5,7 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.smart.event.event_management_system.service.EventService;
+import com.smart.event.event_management_system.entity.Role;
+import com.smart.event.event_management_system.entity.User;
+import com.smart.event.event_management_system.repository.UserRepository;
+import com.smart.event.event_management_system.service.UserService;
 
 @SpringBootApplication
 public class EventManagementSystemApplication {
@@ -15,9 +18,19 @@ public class EventManagementSystemApplication {
     }
 
     @Bean
-    CommandLineRunner test(EventService eventService) {
+    CommandLineRunner seedDemoAdmin(UserRepository userRepository, UserService userService) {
         return args -> {
-            System.out.println(eventService.getActiveEvents());
+            String demoAdminEmail = "admin.demo@smart-event.local";
+
+            if (userRepository.findByEmail(demoAdminEmail).isEmpty()) {
+                User admin = new User();
+                admin.setName("Demo Admin");
+                admin.setEmail(demoAdminEmail);
+                admin.setPassword("Admin@123");
+                admin.setRole(Role.ADMIN);
+                userService.registerUser(admin);
+                System.out.println("Demo admin created: " + demoAdminEmail);
+            }
         };
     }
 }

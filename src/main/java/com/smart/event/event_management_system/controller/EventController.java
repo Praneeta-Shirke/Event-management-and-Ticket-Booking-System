@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import com.smart.event.event_management_system.dto.EventRequestDto;
 import com.smart.event.event_management_system.dto.EventResponseDto;
 import com.smart.event.event_management_system.entity.Event;
+import com.smart.event.event_management_system.security.JwtUtil;
 import com.smart.event.event_management_system.service.EventService;
+import com.smart.event.event_management_system.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -20,14 +22,20 @@ import jakarta.validation.Valid;
 public class EventController {
 
     private final EventService eventService;
+    private final JwtUtil jwtUtil;
+    private final UserService userService;
 
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, JwtUtil jwtUtil, UserService userService) {
         this.eventService = eventService;
+        this.jwtUtil = jwtUtil;
+        this.userService = userService;
     }
 
     @PreAuthorize("hasRole('ORGANIZER')")
     @PostMapping
-    public ResponseEntity<EventResponseDto> createEvent(@Valid @RequestBody EventRequestDto dto) {
+    public ResponseEntity<EventResponseDto> createEvent(
+            @Valid @RequestBody EventRequestDto dto,
+            @RequestHeader("Authorization") String authHeader) {
 
         Event event = new Event();
         event.setTitle(dto.getTitle());
@@ -38,7 +46,10 @@ public class EventController {
         event.setPrice(dto.getPrice());
         event.setTotalTickets(dto.getTotalTickets());
 
-        Event saved = eventService.createEvent(event, dto.getOrganizerId());
+        String email = jwtUtil.extractEmail(authHeader.substring(7));
+        Long organizerId = userService.getUserByEmail(email).getId();
+
+        Event saved = eventService.createEvent(event, organizerId);
 
         return new ResponseEntity<>(mapEvent(saved), HttpStatus.CREATED);
     }
@@ -79,4 +90,14 @@ public class EventController {
         dto.setOrganizerId(event.getOrganizerid().getId());
         return dto;
     }
+
+    @GetMapping("/my")
+    @PreAuthorize("hasRole('ORGANIZER')")
+    public List<EventResponseDto> myEvents(
+        @RequestHeader("Authorization") String authHeader) {
+
+        String email = jwtUtil.extractEmail(authHeader.substring(7));
+        return eventService.getEventsByOrganizer(email);
+    }
+
 }

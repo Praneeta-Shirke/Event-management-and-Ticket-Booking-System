@@ -1,5 +1,6 @@
-package com.smart.event.event_management_system.controller;
+package com.smart.event.event_management_system.controller.pageController;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -9,6 +10,19 @@ public class PageController {
     public String myBookings() {
         return "my-bookings";
     }
+    @GetMapping("/")
+    public String index() {return "index";}
+
+    @GetMapping("/organizer")
+    public String organizer() {
+        return "organizer-dashboard";
+    }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin-dashboard";
+    }
+
 
     @GetMapping("/login")
     public String login() { return "login"; }

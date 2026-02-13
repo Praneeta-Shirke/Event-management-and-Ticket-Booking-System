@@ -42,10 +42,20 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/login",
                         "/register",
+                        "/",
                         "/events",
                         "/booking",
-                        "/payment"
+                        "/payment",
+                        "/organizer",
+                        "/admin",
+                        "/my-bookings"
                 ).permitAll()
+
+                // ROLE-SPECIFIC PAGES
+                .requestMatchers("/organizer/**").hasRole("ORGANIZER")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/my-bookings/**").hasRole("USER")
+
 
                 // STATIC FILES
                 .requestMatchers(
