@@ -1,33 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<header>Available Events</header>
+<nav class="topbar">
+    <div class="brand">Explore Events</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/my-bookings">My Bookings</a>
+        <button type="button" onclick="logout()">Logout</button>
+    </div>
+</nav>
 
-<div class="container" id="events"></div>
+<div class="container">
+    <h2>Available Events</h2>
+    <p class="section-intro">Choose an event and continue to quick booking.</p>
+    <div id="events" class="grid"></div>
+</div>
 
 <script>
+const token = localStorage.getItem("token");
+
+if (!token) {
+    window.location.href = "/login";
+}
+
 fetch("/api/events", {
     headers: {
-        "Authorization": "Bearer " + localStorage.getItem("token")
+        "Authorization": "Bearer " + token
     }
 })
 .then(res => res.json())
 .then(data => {
     const container = document.getElementById("events");
+    container.innerHTML = "";
+
     data.forEach(e => {
         container.innerHTML += `
             <div class="card">
                 <div class="flex">
                     <strong>${e.title}</strong>
-                    <span>₹${e.price}</span>
+                    <span class="badge">Rs ${e.price}</span>
                 </div>
                 <p class="small">${e.location} | ${e.eventDate}</p>
-                <button onclick="book(${e.eventId})">Book</button>
+                <div class="actions">
+                    <button type="button" onclick="book(${e.eventId})">Book</button>
+                </div>
             </div>
         `;
     });
@@ -36,6 +59,11 @@ fetch("/api/events", {
 function book(id) {
     localStorage.setItem("eventId", id);
     window.location.href = "/booking";
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "/login";
 }
 </script>
 

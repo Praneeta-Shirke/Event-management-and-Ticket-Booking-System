@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Bookings</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<header>My Booking History</header>
+<nav class="topbar">
+    <div class="brand">My Booking History</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/events">Events</a>
+    </div>
+</nav>
 
-<div class="container" id="bookings"></div>
+<div class="container">
+    <h2>Recent Bookings</h2>
+    <p class="section-intro">Track ticket count and booking status.</p>
+    <div id="bookings" class="grid"></div>
+</div>
 
 <script>
 fetch("/api/bookings/my", {
@@ -19,12 +31,14 @@ fetch("/api/bookings/my", {
 .then(res => res.json())
 .then(data => {
     const div = document.getElementById("bookings");
+    div.innerHTML = "";
+
     data.forEach(b => {
         div.innerHTML += `
             <div class="card">
                 <strong>${b.eventTitle}</strong>
                 <p>Tickets: ${b.numberOfTickets}</p>
-                <p>Status: ${b.bookingStatus}</p>
+                <p class="small">Status: ${b.bookingStatus}</p>
             </div>
         `;
     });

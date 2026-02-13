@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<header>Smart Event System</header>
+<header>Welcome Back</header>
 
-<div class="container">
+<div class="container narrow">
     <h2>Login</h2>
+    <p class="section-intro">Sign in to access your events, bookings, and dashboards.</p>
 
-    <input id="email" placeholder="Email">
+    <input id="email" type="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
 
-    <button onclick="login()">Login</button>
-
-    <p class="small">New user? <a href="/register">Register here</a></p>
+    <div class="actions">
+        <button type="button" onclick="login()">Login</button>
+        <a href="/register" class="small">Create an account</a>
+    </div>
 </div>
 
 <script>
@@ -41,17 +45,15 @@ function login() {
         return res.json();
     })
     .then(data => {
-        // Store auth details
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
 
-        // Redirect based on role
         if (data.role === "ADMIN") {
             window.location.href = "/admin";
         } else if (data.role === "ORGANIZER") {
             window.location.href = "/organizer";
         } else {
-            window.location.href = "/events";
+            window.location.href = "/";
         }
     })
     .catch(err => {
@@ -59,7 +61,6 @@ function login() {
     });
 }
 </script>
-
 
 </body>
 </html>

@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<header>Payment</header>
+<header>Secure Payment</header>
 
-<div class="container">
+<div class="container narrow">
+    <h2>Payment Method</h2>
+    <p class="section-intro">Choose your preferred mode to complete the order.</p>
+
     <select id="mode">
         <option>UPI</option>
         <option>Card</option>
         <option>NetBanking</option>
     </select>
 
-    <button onclick="pay()">Pay</button>
+    <div class="actions">
+        <button type="button" onclick="pay()">Pay Now</button>
+        <a href="/events" class="small">Cancel</a>
+    </div>
 </div>
 
 <script>
@@ -30,11 +38,13 @@ function pay() {
             bookingId: localStorage.getItem("bookingId"),
             mode: mode.value
         })
-    }).then(() => alert("Payment Successful")).then(() => {
-    window.location.replace("/events");
-});
+    })
+    .then(() => alert("Payment successful"))
+    .then(() => {
+        window.location.replace("/events");
+    })
+    .catch(() => alert("Payment failed"));
 }
-
 </script>
 
 </body>

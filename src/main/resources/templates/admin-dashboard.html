@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<header>Admin Dashboard</header>
+<nav class="topbar">
+    <div class="brand">Admin Dashboard</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <button type="button" onclick="logout()">Logout</button>
+    </div>
+</nav>
 
 <div class="container">
-
     <h2>All Users</h2>
-    <div id="users"></div>
+    <p class="section-intro">Review account roles and create additional admin users.</p>
+    <div id="users" class="grid"></div>
 
-    <hr style="margin:40px 0">
+    <hr>
 
     <h2>Create Admin</h2>
-
     <input id="name" placeholder="Name">
-    <input id="email" placeholder="Email">
+    <input id="email" type="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
-
-    <button onclick="createAdmin()">Create Admin</button>
-
+    <button type="button" onclick="createAdmin()">Create Admin</button>
 </div>
 
 <script>
@@ -30,7 +35,7 @@ const token = localStorage.getItem("token");
 const role = localStorage.getItem("role");
 
 if (!token || role !== "ADMIN") {
-    alert("Access Denied");
+    alert("Access denied");
     window.location.href = "/login";
 }
 
@@ -40,19 +45,29 @@ function loadUsers() {
             "Authorization": "Bearer " + token
         }
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Unable to load users");
+        }
+        return res.json();
+    })
     .then(data => {
         const div = document.getElementById("users");
         div.innerHTML = "";
+
         data.forEach(u => {
             div.innerHTML += `
                 <div class="card">
                     <strong>${u.name}</strong>
                     <p>${u.email}</p>
-                    <p>Role: ${u.role}</p>
+                    <p class="small">Role: ${u.role}</p>
                 </div>
             `;
         });
+    })
+    .catch(() => {
+        document.getElementById("users").innerHTML =
+            "<div class=\"card\"><p class=\"small\">Unable to load users.</p></div>";
     });
 }
 
@@ -69,10 +84,22 @@ function createAdmin() {
             password: password.value
         })
     })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Unable to create admin");
+        }
+        return res.json();
+    })
     .then(() => {
-        alert("Admin Created");
+        alert("Admin created");
         loadUsers();
-    });
+    })
+    .catch(err => alert(err.message));
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "/login";
 }
 
 loadUsers();

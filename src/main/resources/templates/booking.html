@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<header>Book Tickets</header>
+<header>Complete Your Booking</header>
 
-<div class="container">
-    <input id="tickets" type="number" placeholder="Number of tickets">
-    <button onclick="book()">Confirm Booking</button>
+<div class="container narrow">
+    <h2>Ticket Selection</h2>
+    <p class="section-intro">Choose number of tickets and continue to payment.</p>
+
+    <input id="tickets" type="number" min="1" placeholder="Number of tickets">
+    <div class="actions">
+        <button type="button" onclick="book()">Confirm Booking</button>
+        <a href="/events" class="small">Back to Events</a>
+    </div>
 </div>
 
 <script>
@@ -31,7 +39,8 @@ function book() {
     .then(data => {
         localStorage.setItem("bookingId", data.bookingId);
         window.location.href = "/payment";
-    });
+    })
+    .catch(() => alert("Unable to create booking"));
 }
 </script>
 

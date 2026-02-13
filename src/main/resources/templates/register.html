@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
-<header>User Registration</header>
+<header>Create Your Account</header>
 
-<div class="container">
-    <h2>Create Account</h2>
+<div class="container narrow">
+    <h2>Join Smart Event</h2>
+    <p class="section-intro">Choose your role and start booking or managing events instantly.</p>
 
-    <input id="name" placeholder="Name">
-    <input id="email" placeholder="Email">
+    <input id="name" placeholder="Full name">
+    <input id="email" type="email" placeholder="Email">
     <input id="password" type="password" placeholder="Password">
 
     <select id="role">
@@ -20,7 +23,10 @@
         <option value="ORGANIZER">Organizer</option>
     </select>
 
-    <button onclick="register()">Register</button>
+    <div class="actions">
+        <button type="button" onclick="register()">Register</button>
+        <a href="/login" class="small">Already have an account?</a>
+    </div>
 </div>
 
 <script>
@@ -34,7 +40,9 @@ function register() {
             password: password.value,
             role: role.value
         })
-    }).then(() => window.location.href = "/login");
+    })
+    .then(() => window.location.href = "/login")
+    .catch(() => alert("Registration failed"));
 }
 </script>
 

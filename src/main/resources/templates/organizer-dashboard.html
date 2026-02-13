@@ -1,32 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Organizer Dashboard</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<header>Organizer Dashboard</header>
+<nav class="topbar">
+    <div class="brand">Organizer Dashboard</div>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/events">Public Events</a>
+        <button type="button" onclick="logout()">Logout</button>
+    </div>
+</nav>
 
 <div class="container">
-
     <h2>Create New Event</h2>
+    <p class="section-intro">Publish events and monitor status in one place.</p>
 
-    <input id="title" placeholder="Event Title">
+    <input id="title" placeholder="Event title">
     <input id="description" placeholder="Description">
     <input id="location" placeholder="Location">
     <input id="eventDate" type="date">
     <input id="time" type="time">
-    <input id="price" type="number" placeholder="Ticket Price">
-    <input id="totalTickets" type="number" placeholder="Total Tickets">
+    <input id="price" type="number" placeholder="Ticket price">
+    <input id="totalTickets" type="number" placeholder="Total tickets">
 
-    <button onclick="createEvent()">Create Event</button>
+    <button type="button" onclick="createEvent()">Create Event</button>
 
-    <hr style="margin:40px 0">
+    <hr>
 
     <h2>My Events</h2>
-    <div id="events"></div>
-
+    <div id="events" class="grid"></div>
 </div>
 
 <script>
@@ -34,7 +42,7 @@ const token = localStorage.getItem("token");
 const role = localStorage.getItem("role");
 
 if (!token || role !== "ORGANIZER") {
-    alert("Access Denied");
+    alert("Access denied");
     window.location.href = "/login";
 }
 
@@ -52,13 +60,20 @@ function createEvent() {
             eventDate: eventDate.value,
             time: time.value,
             price: price.value,
-            totalTicket: totalTickets.value
+            totalTickets: totalTickets.value
         })
     })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Unable to create event");
+        }
+        return res.json();
+    })
     .then(() => {
-        alert("Event Created");
+        alert("Event created");
         loadEvents();
-    });
+    })
+    .catch(err => alert(err.message));
 }
 
 function loadEvents() {
@@ -67,20 +82,35 @@ function loadEvents() {
             "Authorization": "Bearer " + token
         }
     })
-    .then(res => res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Unable to load events");
+        }
+        return res.json();
+    })
     .then(data => {
         const div = document.getElementById("events");
         div.innerHTML = "";
+
         data.forEach(e => {
             div.innerHTML += `
                 <div class="card">
                     <strong>${e.title}</strong>
                     <p>${e.location} | ${e.eventDate}</p>
-                    <p>Status: ${e.status}</p>
+                    <p class="small">Status: ${e.status}</p>
                 </div>
             `;
         });
+    })
+    .catch(() => {
+        document.getElementById("events").innerHTML =
+            "<div class=\"card\"><p class=\"small\">Unable to load organizer events.</p></div>";
     });
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "/login";
 }
 
 loadEvents();
